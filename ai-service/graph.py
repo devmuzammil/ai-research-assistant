@@ -1,33 +1,41 @@
 from dotenv import load_dotenv
 from langchain_groq import ChatGroq
+from langgraph.prebuilt import ToolNode,tools_condition
 from langgraph.graph import StateGraph,START,END
 from state import AgentState
+from tools import search_wikipedia
 
 load_dotenv()
 
 llm=ChatGroq(
     model="openai/gpt-oss-20b",
     temperature=0.6
-    )
+)
+tools=[search_wikipedia]
+llm_with_tools=llm.bind_tools(tools)
 
 def chatbot_node(state:AgentState):
     question=state['question']
-    response= llm.invoke(question)
-    return {'answer':response.content}
+    response= llm_with_tools.invoke(state['messages'])
+    return {'messages':[response]}
+
 
 
 builder=StateGraph(AgentState)
 
+#registering the nodes
 builder.add_node('chatbot',chatbot_node)
+builder.add_node('tools',ToolNode(tools))
 
+#creating the WorkFlow
 builder.add_edge(START,"chatbot")
-builder.add_edge("chatbot",END)
+builder.add_conditional_edges("chatbot",tools_condition)
 
 graph=builder.compile()
 
 response = graph.invoke({
-    "question": "Explain LangGraph in simple words",
+    "question": "Who was Albert Einstein? Search Wikipedia for him.",
     "answer": ""
 })
-
 print(str(response))
+
