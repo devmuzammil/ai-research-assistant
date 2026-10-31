@@ -1,3 +1,5 @@
+@import "highlight.js/styles/github.css";
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -117,14 +119,45 @@ input {
 
 .markdown-content pre {
   overflow-x: auto;
-  border-radius: 0.5rem;
-  background: #29263a;
-  padding: 0.75rem;
-  color: #f8f7ff;
+  margin: 0;
+  padding: 0.9rem 1rem;
+  color: #292344;
 }
 
 .markdown-content pre code {
+  color: inherit;
+  font-family: "Cascadia Code", "SFMono-Regular", Consolas, monospace;
   font-size: 0.85em;
+  line-height: 1.65;
+  white-space: pre;
+}
+
+.markdown-code-block {
+  overflow: hidden;
+  margin: 0.9rem 0;
+  border: 1px solid #e1dced;
+  border-radius: 0.75rem;
+  background: #fff;
+}
+
+.markdown-code-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  border-bottom: 1px solid #e8e4f0;
+  background: #f5f3fa;
+  padding: 0.45rem 0.75rem;
+  color: #625a78;
+  font-family: "Cascadia Code", "SFMono-Regular", Consolas, monospace;
+  font-size: 0.7rem;
+  line-height: 1.4;
+}
+
+.markdown-code-dot {
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 9999px;
+  background: #9b83e8;
 }
 
 .markdown-table-wrapper {

@@ -32,3 +32,19 @@ frontend CORS changes.
 
 To point Axios at another API base URL, set `VITE_API_BASE_URL` before starting
 Vite. The default `/api` base URL uses the development proxy above.
+
+## Deploy to Vercel
+
+Create two Vercel projects from this repository:
+
+- Frontend project root directory: `frontend`
+- Backend project root directory: `ai-service`
+
+In the frontend project's environment variables, set `VITE_API_BASE_URL` to the
+backend project's deployed origin (for example, `https://your-api.vercel.app`,
+without `/chat`). In the backend project, set `FRONTEND_ORIGINS` to the
+frontend's deployed origin.
+
+Set `GROQ_API_KEY` and `MONGODB_URI` in the backend project's Vercel environment
+settings. Do not put these secrets in frontend variables or commit them to Git.
+Redeploy both projects after changing environment variables.
