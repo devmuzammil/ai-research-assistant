@@ -40,10 +40,12 @@ Create two Vercel projects from this repository:
 - Frontend project root directory: `frontend`
 - Backend project root directory: `ai-service`
 
-In the frontend project's environment variables, set `VITE_API_BASE_URL` to the
-backend project's deployed origin (for example, `https://your-api.vercel.app`,
-without `/chat`). In the backend project, set `FRONTEND_ORIGINS` to the
-frontend's deployed origin.
+In The frontend defaults to the deployed API origin
+`https://ai-research-assistant-api.vercel.app`. To use another backend origin,
+set `VITE_API_BASE_URL` in the frontend project's environment variables (use the
+origin only, without `/chat`). The backend allows the production frontend origin
+`https://ai-research-assistant.vercel.app` by default; set `FRONTEND_ORIGINS` in
+the backend project to override it.
 
 Set `GROQ_API_KEY` and `MONGODB_URI` in the backend project's Vercel environment
 settings. Do not put these secrets in frontend variables or commit them to Git.
