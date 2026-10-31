@@ -5,6 +5,14 @@ import { chatState } from '../state/chatState';
 import ChatInput from './ChatInput';
 import MessageBubble from './MessageBubble';
 
+function createMessageId() {
+  if (typeof crypto.randomUUID === 'function') {
+    return crypto.randomUUID();
+  }
+
+  return `${Date.now()}-${Math.random().toString(36).slice(2)}`;
+}
+
 function ChatWindow() {
   const [chat, setChat] = useRecoilState(chatState);
   const [draft, setDraft] = useState('');
@@ -23,7 +31,7 @@ function ChatWindow() {
     }
 
     const userMessage = {
-      id: crypto.randomUUID(),
+      id: createMessageId(),
       role: 'user',
       text: message,
     };
@@ -43,7 +51,7 @@ function ChatWindow() {
         messages: [
           ...currentChat.messages,
           {
-            id: crypto.randomUUID(),
+            id: createMessageId(),
             role: 'assistant',
             text: answer,
           },
@@ -115,7 +123,7 @@ function ChatWindow() {
             >
               AI
             </div>
-            <p className="rounded-2xl rounded-bl-md bg-[#3D3AEF] px-4 py-3 text-sm text-white">
+            <p className="rounded-2xl rounded-bl-md bg-[#F3F0FF] px-4 py-3 text-sm text-[#292344]">
               Thinking...
             </p>
           </div>

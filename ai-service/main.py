@@ -1,7 +1,10 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 from langchain_core.messages import HumanMessage
 from graph import graph
+from database import save_conversation
+from pymongo.errors import PyMongoError
+
 
 app=FastAPI()
 
@@ -26,14 +29,17 @@ def chat(request:ChatRequest):
         config={
             "configurable":{
                 "thread_id":request.thread_id
-            }
+            },
+            "recursion_limit": 10
         }
     )
+    answer = response["messages"][-1].content
+    try:
+        save_conversation(request.thread_id, request.message, answer)
+    except PyMongoError as error:
+        raise HTTPException(
+            status_code=503,
+            detail="The response was generated, but could not be saved to MongoDB.",
+        ) from error
 
-    
-    for message in response["messages"]:
-        print("\nTYPE:", type(message).__name__)
-        print("CONTENT:", message.content)
-    return{
-        "response":response["messages"][-1].content
-    }
+    return {"response": answer}

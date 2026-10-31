@@ -2,6 +2,12 @@
 
 This React app is separate from the FastAPI backend. It uses Tailwind CSS for
 styling, Recoil for the chat state, and Axios for requests.
+Assistant replies support Markdown, including GitHub Flavored Markdown tables.
+
+The backend stores each successful chat turn in the MongoDB database
+`ai_research_assistant`, in the `conversations` collection. Make sure MongoDB is
+running and `MONGODB_URI` is set in `ai-service/.env`. The database and
+collection appear in MongoDB Compass after the first successful chat is saved.
 
 ## Run locally
 

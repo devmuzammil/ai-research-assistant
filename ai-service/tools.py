@@ -7,11 +7,24 @@ wikipedia.set_user_agent(
 
 @tool
 def search_wikipedia(query: str):
-    """Search Wikipedia and return a short summary."""
-    try:
-        print("Wikipedia tool is being called!")
-        summary = wikipedia.summary(query,sentences=3,auto_suggest=True,redirect=True)
-        return summary
-    except Exception as e:
-        print("WIKIPEDIA ERROR:", repr(e))
-        return f"Wikipedia search failed: {str(e)}"
+    """Search Wikipedia and return the full text of a matching article."""
+    print("Wikipedia tool is being called!")
+    titles = wikipedia.search(query, results=3)
+    if not titles:
+        return f"No Wikipedia pages were found for: {query}"
+
+    for title in titles:
+        try:
+            page = wikipedia.page(title, auto_suggest=False)
+        except (
+            wikipedia.exceptions.PageError,
+            wikipedia.exceptions.DisambiguationError,
+        ):
+            continue
+
+        content = page.content[:12000]
+        if len(page.content) > len(content):
+            content += "\n\n[Article text truncated to fit the model's request limit.]"
+        return f"Wikipedia page: {page.title}\n\n{content}"
+
+    return f"No readable Wikipedia pages were found for: {query}"

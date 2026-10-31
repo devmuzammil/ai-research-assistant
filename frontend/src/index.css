@@ -25,3 +25,130 @@ button,
 input {
   font: inherit;
 }
+
+.markdown-content > :first-child {
+  margin-top: 0;
+}
+
+.markdown-content > :last-child {
+  margin-bottom: 0;
+}
+
+.markdown-content h1,
+.markdown-content h2,
+.markdown-content h3,
+.markdown-content h4 {
+  margin: 1.25rem 0 0.6rem;
+  font-weight: 700;
+  line-height: 1.35;
+}
+
+.markdown-content h1 {
+  font-size: 1.35rem;
+}
+
+.markdown-content h2 {
+  font-size: 1.2rem;
+}
+
+.markdown-content h3 {
+  font-size: 1.05rem;
+}
+
+.markdown-content p,
+.markdown-content ul,
+.markdown-content ol,
+.markdown-content blockquote,
+.markdown-content pre,
+.markdown-content table {
+  margin: 0.75rem 0;
+}
+
+.markdown-content ul,
+.markdown-content ol {
+  padding-left: 1.5rem;
+}
+
+.markdown-content ul {
+  list-style: disc;
+}
+
+.markdown-content ol {
+  list-style: decimal;
+}
+
+.markdown-content li + li {
+  margin-top: 0.3rem;
+}
+
+.markdown-content blockquote {
+  border-left: 3px solid #a78bfa;
+  padding-left: 0.85rem;
+  color: #4b4562;
+}
+
+.markdown-content hr {
+  margin: 1rem 0;
+  border: 0;
+  border-top: 1px solid #d8d2eb;
+}
+
+.markdown-content a {
+  color: #6d4ad1;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.markdown-content strong {
+  font-weight: 700;
+}
+
+.markdown-content em {
+  font-style: italic;
+}
+
+.markdown-content :not(pre) > code {
+  border-radius: 0.25rem;
+  background: #e7e1fb;
+  color: #4c1d95;
+  padding: 0.1rem 0.3rem;
+  font-size: 0.9em;
+}
+
+.markdown-content pre {
+  overflow-x: auto;
+  border-radius: 0.5rem;
+  background: #29263a;
+  padding: 0.75rem;
+  color: #f8f7ff;
+}
+
+.markdown-content pre code {
+  font-size: 0.85em;
+}
+
+.markdown-table-wrapper {
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+.markdown-content table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.85em;
+  line-height: 1.5;
+}
+
+.markdown-content th,
+.markdown-content td {
+  min-width: 6rem;
+  border: 1px solid #d8d2eb;
+  padding: 0.45rem 0.6rem;
+  text-align: left;
+  vertical-align: top;
+}
+
+.markdown-content th {
+  background: #e9e4f8;
+  font-weight: 700;
+}
