@@ -10,7 +10,7 @@ def search_wikipedia(query: str):
     """Search Wikipedia and return a short summary."""
     try:
         print("Wikipedia tool is being called!")
-        summary = wikipedia.summary(query, sentences=3)
+        summary = wikipedia.summary(query,sentences=3,auto_suggest=True,redirect=True)
         return summary
     except Exception as e:
         print("WIKIPEDIA ERROR:", repr(e))

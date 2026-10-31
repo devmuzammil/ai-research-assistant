@@ -41,18 +41,3 @@ config = {
         "thread_id": "conversation_1"
     }
 }
-
-response = graph.invoke(
-    {
-        "messages": [
-            HumanMessage(content="Search Wikipedia for the history of Pakistan and summarize it.")
-        ]
-    },
-    config=config
-)
-
-print(str(response["messages"][-1].content))
-
-for message in response["messages"]:
-    print("\nTYPE:", type(message).__name__)
-    print("CONTENT:", message.content)
